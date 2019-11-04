@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Drawing Area</title>
+<!-- You can add your style here rather than in an external style sheet.
+Worked with: Sam Drew, Flan O'Donnel, Michael Barsky, Nell Steinmetz -->
+<style>
+	canvas {
+	    border:5px solid #d3d3d3;
+	    background-color: #f1f1f1;
+	    display: block;
+	}
+</style>
+</head>
+<body>
+    <!-- DO NOT MODIFY THIS HTML -->
+    <canvas id = "myCanvas" width = "350" height = "500"  ></canvas>
+    <input type = "color" id = "picker"/>
+</body>
+
+<script> 
+	// var canvas = document.querySelector('#myCanvas');
+	// //this means we are doing 2d drawing on this canvas
+	// var ctx = canvas.getContext('2d');
+	// ctx.fillStyle = '#00ff00';
+	// // ctx.fillRect(0,0,150,75);
+	// // draw();
+	var canvas = document.querySelector('#myCanvas');
+	var ctx = canvas.getContext('2d');
+	var color = 'black';
+	var og = 'black';
+	ctx.fillStyle = color;
+	ctx.strokeStyle = color;
+	
+
+	function resizeCanvas(){
+		canvas.width = window.innerWidth * 0.80;
+		canvas.height = window.innerHeight * 0.80;	
+	}
+
+	resizeCanvas();
+
+	function draw(posX, posY) {
+		console.log("I am drawing");
+		ctx.fillStyle = color;
+		ctx.beginPath();
+		ctx.arc(posX,posY,10,0,2 * Math.PI);
+		ctx.fill();
+
+	}
+
+	myCanvas.addEventListener(
+	'mousemove', function (e){
+		//put console.log(e) in everywhere because it tells you whats happening 
+		console.log(e.x);
+		console.log(e.y);
+		console.log(e);
+		draw(e.x, e.y);
+	})
+
+	//google "begin path"
+	window.addEventListener(
+		'keydown', function (e){
+			console.log(e);
+		var x = e.keyCode;
+		if (x == 32) {
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+		}
+		if (x == 71){
+			color = 'green';
+			og = 'green';
+			ctx.fillStyle = color;
+			ctx.strokeStyle = color;
+		}
+		if (x == 82){
+			color = 'red';
+			g = 'red';
+			ctx.fillStyle = color;
+			ctx.strokeStyle = color;
+		}
+		if (x == 66){
+			color = 'blue';
+			og = 'blue';
+			ctx.fillStyle = color;
+			ctx.strokeStyle = color;
+		}
+		if (x == 89){
+			color = 'yellow';
+			og = 'yellow';
+			ctx.fillStyle = color;
+			ctx.strokeStyle = color;
+		}
+		if (x == 38){
+			//up
+			color = '#ffffff00'
+					
+		}
+		if (x == 40){
+			//down
+			color = og;	
+		}
+		}
+	)
+	
+	var color_picker = document.querySelector('#picker');
+	window.addEventListener('change', function(e) {
+		color = color_picker.value;
+		console.log(color);
+		ctx.fillStyle = color;
+		ctx.strokeStyle = color;
+	})
+
+
+</script>
+</html>
